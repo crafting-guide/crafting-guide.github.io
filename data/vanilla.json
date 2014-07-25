@@ -11,6 +11,10 @@
             "input": [[1, "Potato"], [125, "milli-coal"]],
             "tools": ["Furnace"]
         }, {
+            "output": [[1, "Baked Potato"]],
+            "input": [[1, "Potato"], [125, "milli-coal"]],
+            "tools": ["Crafting Table"]
+        }, {
             "output": [[1, "Beacon"]],
             "input": [[5, "Glass"], [3, "Obsidian"], [1, "Nether Star"]],
             "tools": ["Crafting Table"]
