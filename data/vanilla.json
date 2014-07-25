@@ -13,7 +13,7 @@
         }, {
             "output": [[1, "Baked Potato"]],
             "input": [[1, "Potato"], [125, "milli-coal"]],
-            "tools": ["Crafting Table"]
+            "tools": ["A thing goes here"]
         }, {
             "output": [[1, "Beacon"]],
             "input": [[5, "Glass"], [3, "Obsidian"], [1, "Nether Star"]],
