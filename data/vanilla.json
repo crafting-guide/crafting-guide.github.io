@@ -63,6 +63,10 @@
             "input": [[1, "Clay"], [125, "milli-coal"]],
             "tools": ["Furnace"]
         }, {
+            "output": [[1, "Baked Potato"]],
+            "input": [[2, "Potato"], [125, "milli-coal"]],
+            "tools": ["Furnace"]
+        }, {
             "output": [[1, "Bricks"]],
             "input": [[4, "Brick"]],
             "tools": []
