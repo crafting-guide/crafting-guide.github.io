@@ -220,9 +220,9 @@ function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternati
     if (shouldIncludeTools !== true) shouldIncludeTools = false;
     if (recipeBooks === undefined) recipeBooks = __recipeBooks;
     var object = {
-        count = count,
-        name = recipeName,
-        list = []
+        count: count,
+        name: recipeName,
+        list: []
     }
     stepsToProcess = []
     
@@ -234,9 +234,9 @@ function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternati
 
 function searchForSteps(recipeName) {
     var object = {
-        steps = [],
-        recipe = [],
-        inputs = []
+        steps: [],
+        recipe: [],
+        inputs: []
     }
     object.steps.push(recipeName)
     object.recipe = findAllRecipes(recipeName, undefined)
