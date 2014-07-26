@@ -220,7 +220,7 @@ function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternati
     if (shouldIncludeTools !== true) shouldIncludeTools = false;
     if (recipeBooks === undefined) recipeBooks = __recipeBooks;
     var object = {
-        count = count
+        stepCount = count
         name = recipeName
         list = []
     }
