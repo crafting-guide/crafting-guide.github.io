@@ -214,6 +214,41 @@ function updatePageState(count, recipeName) {
     ga('send', 'pageview');
 }
 
+// Crafting Plan //
+
+function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternative, whichAlternative, recipeBooks) {
+    if (shouldIncludeTools !== true) shouldIncludeTools = false;
+    if (recipeBooks === undefined) recipeBooks = __recipeBooks;
+    var object = {
+        count = count
+        name = recipeName
+        list = []
+    }
+    stepsToProcess = []
+    
+    while (stepsToProcess.length > 0) {
+        step = stepsToProcess.pop();
+        object.list.push(step)
+    }
+}
+
+function searchForSteps(recipeName) {
+    var object = {
+        steps = []
+        recipe = []
+        inputs = []
+    }
+    object.steps.push(recipeName)
+    object.recipe = findAllRecipes(recipeName, undefined)
+    object.inputs = object.recipe.input
+    for (var i = 0; i < object.inputs.length; i++) {
+        tempSteps = searchForSteps(object.inputs[i]).steps
+        for (var i = 0; i < tempSteps.length; i++) {
+            object.steps.push(tempSteps[i])
+        }
+    }
+    return object
+}
 // Crafting Node Object ///////////////////////////////////////////////////////////////////////////////////////////////
 
 function createCraftingNode(count, recipeName, shouldIncludeTools, alternatives, recipeBooks) {
