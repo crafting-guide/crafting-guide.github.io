@@ -41,7 +41,7 @@ Array.prototype.toHtml = function(delimiter) {
 
 $(function() {
     $("#recipe_book_load_button").click(onRecipeLoadButtonClicked);
-    $("#crafting_count").change(onCraftingSelectorChanged2);
+    $("#crafting_count").change(onCraftingSelectorChanged);
     $("#tools_included").change(onIncludeToolsChanged);
     $("#crafting_selector").focus(onCraftingSelectorFocused);
     $("#inventory").keyup(onInventoryChanged);
@@ -97,7 +97,7 @@ function onCraftingSelectorFocused() {
 
 function onIncludeToolsChanged() {
     __toolsIncluded = $("#tools_included").is(":checked");
-    onCraftingSelectorChanged2()
+    onCraftingSelectorChanged()
 }
 
 function onInventoryChanged() {
@@ -118,7 +118,7 @@ function onInventoryChanged() {
             }
         }
     }
-    onCraftingSelectorChanged2();
+    onCraftingSelectorChanged();
 }
 
 function onRecipeBookLoaded() {
@@ -207,7 +207,7 @@ function parseUrlParameters() {
         $("#crafting_selector").val(recipeName);
 
         if (hasRecipe(recipeName)) {
-            onCraftingSelectorChanged2();
+            onCraftingSelectorChanged();
         } else if (recipeName.length > 0) {
             $("#crafting_error").html("Cannot find recipe for " + recipeName);
             $("#crafting_error").fadeIn(FADE_DURATION).delay(ERROR_DISPLAY_DURATION).fadeOut(FADE_DURATION);
@@ -218,9 +218,9 @@ function parseUrlParameters() {
 function updateCraftingSelector() {
     $("#crafting_selector").autocomplete({
         source: getAllRecipeNames(), delay: 0, minLength: 0,
-        change: onCraftingSelectorChanged2,
-        close: onCraftingSelectorChanged2,
-        select: onCraftingSelectorChanged2,
+        change: onCraftingSelectorChanged,
+        close: onCraftingSelectorChanged,
+        select: onCraftingSelectorChanged,
     });
 }
 
