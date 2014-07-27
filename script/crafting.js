@@ -250,7 +250,7 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
         baseMaterials: []
     }
     stepsToProcess = searchForSteps(object.count, object.name);
-    object.list = stepsToProcess.reverse();
+    object.list = stepsToProcess.steps.reverse();
     for (var i = 0; i < object.list.length; i++) {
         if (object.list[i][2]) {
             object.baseMaterials.push(object.list[i]);
