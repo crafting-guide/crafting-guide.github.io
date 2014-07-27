@@ -53,39 +53,39 @@ $(function() {
     loadRecipeBook("data/thermal_expansion.json");
 });
 
-//function onCraftingSelectorChanged() {
-//    var recipeName = $("#crafting_selector").val();
-//    var count = parseInt($("#crafting_count option:selected").val());
-//    if (count === undefined) return;
-//
-//
-//    if (! hasRecipe(recipeName)) {
-//        $("#crafting_output").slideUp(SLIDE_DURATION);
-//    } else {
-//        var plan = createCraftingPlan(count, recipeName, __toolsIncluded);
-//        var result = createCraftingResult(__inventory);
-//        plan.alternatives[0].craft(result);
-//
-//        $("#missing_materials").html(result.missingMaterials.toHtml());
-//        $("#crafted_items").html(formatStepList(result.stepList));
-//        $("#leftover_materials").html(result.inventory.toHtml());
-//        $("#crafting_output").slideDown(SLIDE_DURATION);
-//    }
-//
-//    updatePageState(count, recipeName);
-//}
 function onCraftingSelectorChanged() {
     var recipeName = $("#crafting_selector").val();
     var count = parseInt($("#crafting_count option:selected").val());
     if (count === undefined) return;
-    
+
+
     if (! hasRecipe(recipeName)) {
         $("#crafting_output").slideUp(SLIDE_DURATION);
     } else {
-        var plan = createNewPlan(count, recipeName);
-        $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
+        var plan = createCraftingPlan(count, recipeName, __toolsIncluded);
+        var result = createCraftingResult(__inventory);
+        plan.alternatives[0].craft(result);
+
+        $("#missing_materials").html(result.missingMaterials.toHtml());
+        $("#crafted_items").html(formatStepList(result.stepList));
+        $("#leftover_materials").html(result.inventory.toHtml());
+        $("#crafting_output").slideDown(SLIDE_DURATION);
     }
+
+    updatePageState(count, recipeName);
 }
+//function onCraftingSelectorChanged() {
+//    var recipeName = $("#crafting_selector").val();
+//    var count = parseInt($("#crafting_count option:selected").val());
+//    if (count === undefined) return;
+//    
+//    if (! hasRecipe(recipeName)) {
+//        $("#crafting_output").slideUp(SLIDE_DURATION);
+//    } else {
+//        var plan = createNewPlan(count, recipeName);
+//        $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
+//    }
+//}
 
 
 function onCraftingSelectorFocused() {
