@@ -259,6 +259,7 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
             object.list.splice(i, 1);
         }
     }
+    document.getElementById("testlist").innerHTML = object.list;
     return object;
 }
 
