@@ -53,27 +53,40 @@ $(function() {
     loadRecipeBook("data/thermal_expansion.json");
 });
 
+//function onCraftingSelectorChanged() {
+//    var recipeName = $("#crafting_selector").val();
+//    var count = parseInt($("#crafting_count option:selected").val());
+//    if (count === undefined) return;
+//
+//
+//    if (! hasRecipe(recipeName)) {
+//        $("#crafting_output").slideUp(SLIDE_DURATION);
+//    } else {
+//        var plan = createCraftingPlan(count, recipeName, __toolsIncluded);
+//        var result = createCraftingResult(__inventory);
+//        plan.alternatives[0].craft(result);
+//
+//        $("#missing_materials").html(result.missingMaterials.toHtml());
+//        $("#crafted_items").html(formatStepList(result.stepList));
+//        $("#leftover_materials").html(result.inventory.toHtml());
+//        $("#crafting_output").slideDown(SLIDE_DURATION);
+//    }
+//
+//    updatePageState(count, recipeName);
+//}
 function onCraftingSelectorChanged() {
     var recipeName = $("#crafting_selector").val();
     var count = parseInt($("#crafting_count option:selected").val());
     if (count === undefined) return;
-
-
+    
     if (! hasRecipe(recipeName)) {
         $("#crafting_output").slideUp(SLIDE_DURATION);
     } else {
-        var plan = createCraftingPlan(count, recipeName, __toolsIncluded);
-        var result = createCraftingResult(__inventory);
-        plan.alternatives[0].craft(result);
-
-        $("#missing_materials").html(result.missingMaterials.toHtml());
-        $("#crafted_items").html(formatStepList(result.stepList));
-        $("#leftover_materials").html(result.inventory.toHtml());
-        $("#crafting_output").slideDown(SLIDE_DURATION);
+        var plan = createCraftingPlan(count, recipeName);
+        $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
     }
-
-    updatePageState(count, recipeName);
 }
+
 
 function onCraftingSelectorFocused() {
     $("#crafting_selector").autocomplete("search");
@@ -165,10 +178,10 @@ function formatStepList(stepList) {
 
 function formatCraftingList(craftingList) {
     var result = "";
-    for (var i = 0; i < stepList.length; i++) {
+    for (var i = 0; i < craftingList.length; i++) {
         result += "<tr>";
-        result += "<td>" + stepList[i][0] + "</td>";
-        result += "<td>" + stepList[i][1] + "</td>";
+        result += "<td>" + craftingList[i][0] + "</td>";
+        result += "<td>" + craftingList[i][1] + "</td>";
         result += "</tr>";
     }
     return result;
