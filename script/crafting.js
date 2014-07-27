@@ -266,9 +266,9 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
 function searchForSteps(count, recipeName) {
     recipeName = String(recipeName);
     var object = {
+        count: count,
         steps: [],
-        recipe: [],
-        inputs: [],
+        recipe: undefined,
         bottom: false
     }
     object.steps.push([count, recipeName]);
@@ -276,10 +276,9 @@ function searchForSteps(count, recipeName) {
         object.bottom = true;
         return object;
     }
-    object.recipe = findAllRecipes(recipeName, undefined);
-    object.inputs = object.recipe[0].input;
-    for (var i = 0; i < object.inputs.length; i++) {
-        tempStep = object.inputs[i];
+    object.recipe = findAllRecipes(recipeName, undefined).shift();
+    for (var i = 0; i < object.recipe.input.length; i++) {
+        tempStep = object.recipe.input[i];
         tempStep[0] = tempStep[0]*object.count;
         tempSteps = searchForSteps(tempStep[0], tempStep[1]);
         for (var i = 0; i < tempSteps.steps.length; i++) {
