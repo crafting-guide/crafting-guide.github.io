@@ -84,6 +84,8 @@ function onCraftingSelectorChanged2() {
     } else {
         var plan = createNewPlan(count, recipeName);
         $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
+        $("#crafted_items").html(formatCraftingList(plan.list));
+        $("#crafting_output").slideDown(SLIDE_DURATION);
     }
     updatePageState(count, recipeName);
 }
