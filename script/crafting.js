@@ -224,30 +224,36 @@ function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternati
         name: recipeName,
         list: []
     }
-    stepsToProcess = []
-    
-    while (stepsToProcess.length > 0) {
-        step = stepsToProcess.pop();
-        object.list.push(step)
-    }
+    stepsToProcess = searchForSteps(object.count, object.name);
+    object.list = stepsToProcess.reverse();
 }
 
-function searchForSteps(recipeName) {
+function searchForSteps(count, recipeName) {
     var object = {
         steps: [],
         recipe: [],
-        inputs: []
+        inputs: [],
+        bottom: false
     }
-    object.steps.push(recipeName)
-    object.recipe = findAllRecipes(recipeName, undefined)
-    object.inputs = object.recipe.input
+    object.steps.push([count, recipeName]);
+    if (! hasRecipe(recipeName)) {
+        object.bottom = true;
+        return object;
+    }
+    object.recipe = findAllRecipes(recipeName, undefined);
+    object.inputs = object.recipe.input;
     for (var i = 0; i < object.inputs.length; i++) {
-        tempSteps = searchForSteps(object.inputs[i]).steps
-        for (var i = 0; i < tempSteps.length; i++) {
-            object.steps.push(tempSteps[i])
+        tempStep = object.inputs[i];
+        tempStep[0] = tempStep[0]*object.count;
+        tempSteps = searchForSteps(tempStep[0], tempStep[1]);
+        for (var i = 0; i < tempSteps.steps.length; i++) {
+            if (tempSteps.bottom === true) {
+                tempSteps.steps[i].push("bottom");
+            }
+            object.steps.push(tempSteps.steps[i]);
         }
     }
-    return object
+    return object;
 }
 // Crafting Node Object ///////////////////////////////////////////////////////////////////////////////////////////////
 
