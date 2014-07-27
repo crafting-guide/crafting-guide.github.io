@@ -41,7 +41,7 @@ Array.prototype.toHtml = function(delimiter) {
 
 $(function() {
     $("#recipe_book_load_button").click(onRecipeLoadButtonClicked);
-    $("#crafting_count").change(onCraftingSelectorChanged);
+    $("#crafting_count").change(onCraftingSelectorChanged2);
     $("#tools_included").change(onIncludeToolsChanged);
     $("#crafting_selector").focus(onCraftingSelectorFocused);
     $("#inventory").keyup(onInventoryChanged);
@@ -74,18 +74,19 @@ function onCraftingSelectorChanged() {
 
     updatePageState(count, recipeName);
 }
-//function onCraftingSelectorChanged() {
-//    var recipeName = $("#crafting_selector").val();
-//    var count = parseInt($("#crafting_count option:selected").val());
-//    if (count === undefined) return;
-//    
-//    if (! hasRecipe(recipeName)) {
-//        $("#crafting_output").slideUp(SLIDE_DURATION);
-//    } else {
-//        var plan = createNewPlan(count, recipeName);
-//        $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
-//    }
-//}
+function onCraftingSelectorChanged2() {
+    var recipeName = $("#crafting_selector").val();
+    var count = parseInt($("#crafting_count option:selected").val());
+    if (count === undefined) return;
+    
+    if (! hasRecipe(recipeName)) {
+        $("#crafting_output").slideUp(SLIDE_DURATION);
+        } else {
+        var plan = createNewPlan(count, recipeName);
+        $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
+    }
+    updatePageState(count, recipeName);
+}
 
 
 function onCraftingSelectorFocused() {
