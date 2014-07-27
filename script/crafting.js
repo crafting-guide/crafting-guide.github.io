@@ -163,6 +163,16 @@ function formatStepList(stepList) {
     return result;
 }
 
+function formatCraftingList(craftingList) {
+    var result = "";
+    for (var i = 0; i < stepList.length; i++) {
+        result += "<tr>";
+        result += "<td>" + stepList[i][0] + "</td>";
+        result += "<td>" + stepList[i][1] + "</td>";
+        result += "</tr>";
+    }
+    return result;
+}
 function parseUrlParameters() {
     var quantity = $.url().param('quantity');
     if (quantity !== undefined) {
@@ -216,16 +226,23 @@ function updatePageState(count, recipeName) {
 
 // Crafting Plan //
 
-function createNewPlan(count, recipeName, shouldIncludeTools, shouldUseAlternative, whichAlternative, recipeBooks) {
+function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
     if (shouldIncludeTools !== true) shouldIncludeTools = false;
     if (recipeBooks === undefined) recipeBooks = __recipeBooks;
     var object = {
         count: count,
         name: recipeName,
-        list: []
+        list: [],
+        baseMaterials: []
     }
     stepsToProcess = searchForSteps(object.count, object.name);
     object.list = stepsToProcess.reverse();
+    for (var i = 0; i < object.list.length; i++) {
+        if (object.list[i][2]) {
+            object.baseMaterials.push(object.list[i])
+            object.list.splice(i, 1)
+        }
+    }
 }
 
 function searchForSteps(count, recipeName) {
@@ -241,7 +258,7 @@ function searchForSteps(count, recipeName) {
         return object;
     }
     object.recipe = findAllRecipes(recipeName, undefined);
-    object.inputs = object.recipe.input;
+    object.inputs = object.recipe[0].input;
     for (var i = 0; i < object.inputs.length; i++) {
         tempStep = object.inputs[i];
         tempStep[0] = tempStep[0]*object.count;
