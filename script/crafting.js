@@ -95,7 +95,7 @@ function onCraftingSelectorFocused() {
 
 function onIncludeToolsChanged() {
     __toolsIncluded = $("#tools_included").is(":checked");
-    onCraftingSelectorChanged()
+    onCraftingSelectorChanged2()
 }
 
 function onInventoryChanged() {
@@ -116,7 +116,7 @@ function onInventoryChanged() {
             }
         }
     }
-    onCraftingSelectorChanged();
+    onCraftingSelectorChanged2();
 }
 
 function onRecipeBookLoaded() {
@@ -205,7 +205,7 @@ function parseUrlParameters() {
         $("#crafting_selector").val(recipeName);
 
         if (hasRecipe(recipeName)) {
-            onCraftingSelectorChanged();
+            onCraftingSelectorChanged2();
         } else if (recipeName.length > 0) {
             $("#crafting_error").html("Cannot find recipe for " + recipeName);
             $("#crafting_error").fadeIn(FADE_DURATION).delay(ERROR_DISPLAY_DURATION).fadeOut(FADE_DURATION);
@@ -216,9 +216,9 @@ function parseUrlParameters() {
 function updateCraftingSelector() {
     $("#crafting_selector").autocomplete({
         source: getAllRecipeNames(), delay: 0, minLength: 0,
-        change: onCraftingSelectorChanged,
-        close: onCraftingSelectorChanged,
-        select: onCraftingSelectorChanged,
+        change: onCraftingSelectorChanged2,
+        close: onCraftingSelectorChanged2,
+        select: onCraftingSelectorChanged2,
     });
 }
 
