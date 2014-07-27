@@ -252,10 +252,11 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
     object.list = stepsToProcess.reverse();
     for (var i = 0; i < object.list.length; i++) {
         if (object.list[i][2]) {
-            object.baseMaterials.push(object.list[i])
-            object.list.splice(i, 1)
+            object.baseMaterials.push(object.list[i]);
+            object.list.splice(i, 1);
         }
     }
+    return object;
 }
 
 function searchForSteps(count, recipeName) {
