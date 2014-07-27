@@ -81,7 +81,7 @@ function onCraftingSelectorChanged2() {
     
     if (! hasRecipe(recipeName)) {
         $("#crafting_output").slideUp(SLIDE_DURATION);
-        } else {
+    } else {
         var plan = createNewPlan(count, recipeName);
         $("#missing_materials").html(formatCraftingList(plan.baseMaterials));
     }
@@ -245,7 +245,7 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
     if (recipeBooks === undefined) recipeBooks = __recipeBooks;
     var object = {
         count: count,
-        name: recipeName,
+        name: String(recipeName),
         list: [],
         baseMaterials: []
     }
@@ -261,6 +261,7 @@ function createNewPlan(count, recipeName, shouldIncludeTools, recipeBooks) {
 }
 
 function searchForSteps(count, recipeName) {
+    recipeName = String(recipeName);
     var object = {
         steps: [],
         recipe: [],
